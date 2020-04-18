@@ -18,8 +18,8 @@ MongoClient.connect(url, function (err, client) {
 var transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'sujaynandhakumar96@gmail.com',
-    pass: 'Sujay@4444'
+    user: 'xxxx@gmail.com',
+    pass: 'xxxxxx'
   }
 });
 
@@ -30,13 +30,13 @@ const bcrypt = require('bcrypt');
 var router = express.Router();
 
 const saltRounds = 10;
-const myPlaintextPassword = 'sujay';
-const someOtherPlaintextPassword = 'not_bacon';
-const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-console.log(hash)
-bcrypt.compare(myPlaintextPassword, hash).then(function (result) {
-  console.log(result)
-});
+// const myPlaintextPassword = 'sujay';
+// const someOtherPlaintextPassword = 'not_bacon';
+// const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+// console.log(hash)
+// bcrypt.compare(myPlaintextPassword, hash).then(function (result) {
+//   console.log(result)
+// });
 
 /* GET users listing. */
 router.post('/createUser', function (req, res, next) {
@@ -71,7 +71,7 @@ router.post('/createUser', function (req, res, next) {
           if (err) {
             res.sendStatus(403);
           } else {
-            res.send(body);
+            res.send(200);
           }
         });
       }
@@ -127,8 +127,8 @@ router.get('/resetPassword', (req, res) => {
         res.sendStatus(403);
       } else {
         var mailOptions = {
-          from: 'sujaynandhakumar96@gmail.com',
-          to: 'sujaynandhakumar@gmail.com',
+          from: 'xxxx@gmail.com',
+          to: 'yyyy@gmail.com',
           subject: 'About Password Reset',
           text: randomPassword
         };
@@ -143,8 +143,6 @@ router.get('/resetPassword', (req, res) => {
       }
     });
 });
-
-
 
 
 
@@ -192,7 +190,7 @@ router.post('/order/create', function (req, res) {
     if (err) {
       res.sendStatus(403);
     } else {
-      res.send(body);
+      res.send(200);
     }
   });
 
@@ -210,7 +208,7 @@ router.get('/getAllOrder', function (req, res) {
   collection.find({
     user_id: user_id,
     active: 1
-  }, (err, body) => {
+  }).toArray((err, body) => {
     if (err) {
       res.sendStatus(403);
     } else {
@@ -223,9 +221,9 @@ router.get('/getAllOrder', function (req, res) {
 
 router.get('/getThresoldQty', function (req, res) {
 
-  var collection = MONGODB.collection('foods');
+  var collection = MONGODB.collection('ingredients');
 
-  collection.findOne({ selling_cost: { $gt: poduction_cost } }).toArray((err, body) => {
+  collection.find({ remaining_qty: { $lt: 1000 } }).toArray((err, body) => {
     if (err) {
       res.sendStatus(403);
     } else {
@@ -239,14 +237,14 @@ router.get('/getThresoldQty', function (req, res) {
 
 
 router.get('/getIngredientsBySameVendor', function (req, res) {
-  console.log('hello--');
   var vendor_id = req.query.vendor_id;
+  console.log('hello--', vendor_id);
 
-  var collection = MONGODB.collection('users');
+  var collection = MONGODB.collection('ingredients');
 
-  collection.findOne({
+  collection.find({
     vendor_id: vendor_id,
-  }, (err, body) => {
+  }).toArray((err, body) => {
     if (err) {
       res.sendStatus(403);
     } else {
@@ -262,7 +260,7 @@ router.get('/getFoodsListOverSellingCost', function (req, res) {
 
   var collection = MONGODB.collection('foods');
 
-  collection.findOne({ selling_cost: { $gt: poduction_cost } }).toArray((err, body) => {
+  collection.find({ $expr: { $gt: ["$production_cost", "$selling_cost"] } }).toArray((err, body) => {
     if (err) {
       res.sendStatus(403);
     } else {
