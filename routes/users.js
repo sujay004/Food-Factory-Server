@@ -1,6 +1,5 @@
 var express = require('express');
 var nodemailer = require('nodemailer');
-// var getDb = require("./../bin/db").getDb;
 
 const MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
@@ -30,16 +29,10 @@ const bcrypt = require('bcrypt');
 var router = express.Router();
 
 const saltRounds = 10;
-// const myPlaintextPassword = 'sujay';
-// const someOtherPlaintextPassword = 'not_bacon';
-// const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
-// console.log(hash)
-// bcrypt.compare(myPlaintextPassword, hash).then(function (result) {
-//   console.log(result)
-// });
+
 
 /* GET users listing. */
-router.post('/createUser', function (req, res, next) {
+router.post('/user/create', function (req, res) {
 
   var userData = req.body;
   console.log(userData)
@@ -81,7 +74,7 @@ router.post('/createUser', function (req, res, next) {
 });
 
 
-router.get('/userAuthentication', (req, res) => {
+router.get('/user/authentication', (req, res) => {
   var user_name = req.query.user_name;
   var password = req.query.password;
   console.log(user_name, password);
@@ -110,7 +103,7 @@ router.get('/userAuthentication', (req, res) => {
 });
 
 
-router.get('/resetPassword', (req, res) => {
+router.get('/user/resetPassword', (req, res) => {
   var email_id = req.query.email_id;
   var randomPassword = Math.random().toString(36).substring(7);
   const hash = bcrypt.hashSync(randomPassword, saltRounds);
@@ -146,7 +139,7 @@ router.get('/resetPassword', (req, res) => {
 
 
 
-router.get('/deactiveUser', (req, res) => {
+router.get('/user/deactive', (req, res) => {
   var user_name = req.query.user_name;
 
   var collection = MONGODB.collection('users');
@@ -172,7 +165,6 @@ router.get('/deactiveUser', (req, res) => {
 
 
 router.post('/order/create', function (req, res) {
-  console.log('hello--');
   var orderData = req.body;
 
   var collection = MONGODB.collection('orders');
@@ -194,12 +186,11 @@ router.post('/order/create', function (req, res) {
     }
   });
 
-  // res.render('index', { title: 'Express' });
 });
 
 
 
-router.get('/getAllOrder', function (req, res) {
+router.get('/order/getAllOrder', function (req, res) {
 
   var user_id = req.query.user_id;
   console.log(user_id)
@@ -216,10 +207,9 @@ router.get('/getAllOrder', function (req, res) {
     }
   });
 
-  // res.render('index', { title: 'Express' });
 });
 
-router.get('/getThresoldQty', function (req, res) {
+router.get('/ingredient/getThresoldQty', function (req, res) {
 
   var collection = MONGODB.collection('ingredients');
 
@@ -230,13 +220,11 @@ router.get('/getThresoldQty', function (req, res) {
       res.send(body);
     }
   });
-
-  // res.render('index', { title: 'Express' });
 });
 
 
 
-router.get('/getIngredientsBySameVendor', function (req, res) {
+router.get('/ingredient/getBySameVendor', function (req, res) {
   var vendor_id = req.query.vendor_id;
   console.log('hello--', vendor_id);
 
@@ -256,7 +244,7 @@ router.get('/getIngredientsBySameVendor', function (req, res) {
 });
 
 
-router.get('/getFoodsListOverSellingCost', function (req, res) {
+router.get('/food/getListOverSellingCost', function (req, res) {
 
   var collection = MONGODB.collection('foods');
 
@@ -268,10 +256,7 @@ router.get('/getFoodsListOverSellingCost', function (req, res) {
     }
   });
 
-  // res.render('index', { title: 'Express' });
 });
 
 
-
 module.exports = router;
-console.log(new Date())
