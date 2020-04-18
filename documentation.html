@@ -1,0 +1,76 @@
+<h2 id="food-factory-app-api-doc"># FOOD FACTORY APP API DOC</h2>
+<h1 id="dbconfig">Dbconfig</h1>
+<p>Connection Url : mongodb://localhost:27017</p>
+<p>db Name : food_factory</p>
+<h1 id="url">URL</h1>
+<p>/api/user/create</p>
+<h3 id="method">Method:</h3>
+<p>POST</p>
+<h3 id="example-body-data">Example Body Data</h3>
+<p>{ &quot;first_name&quot;: &quot;sujay&quot;, &quot;last_name&quot;: &quot;nandha&quot;, &quot;user_name&quot;: &quot;sujay&quot;, &quot;password&quot;: &quot;admin&quot;, &quot;email_id&quot;: &quot;admin@gmail.com&quot;, &quot;mobile_number&quot;: &quot;8056329132&quot;, &quot;created_at&quot;: &quot;2020-04-18T13:28:10.923Z&quot;, &quot;active&quot;:&quot;1&quot; }</p>
+<h3 id="example-success-response">Example Success Response:</h3>
+<p>Success Response: 200 Error Response:403</p>
+<h1 id="url-1">URL</h1>
+<p>/api/user/authentication</p>
+<h3 id="method-1">Method:</h3>
+<p>GET</p>
+<h3 id="query-params">Query Params</h3>
+<p>user_name=admin&amp;password=admin</p>
+<h3 id="example-success-response-1">Example Success Response:</h3>
+<p>Success Response: 200 Error Response:403</p>
+<h1 id="url-2">URL</h1>
+<p>/api/user/resetPassword</p>
+<h3 id="method-2">Method:</h3>
+<p>GET</p>
+<h3 id="query-param">Query Param</h3>
+<p>email_id=admin@gmail.com</p>
+<h3 id="note">Note</h3>
+<p>In this api i was implemented sending mail for the new his email id. The Location of the Mail Config available in user.js file ### Mail Config auth: { user: 'xxxx@gmail.com', pass: 'xxxxxx' }</p>
+<h3 id="example-success-response-2">Example Success Response:</h3>
+<p>Success Response: 200 Error Response:403</p>
+<h1 id="url-3">URL</h1>
+<p>/api/user/deactive</p>
+<h3 id="method-3">Method:</h3>
+<p>GET</p>
+<h3 id="query-param-1">Query Param</h3>
+<p>user_name=sujay</p>
+<h3 id="example-success-response-3">Example Success Response:</h3>
+<p>Success Response: 200 Error Response:403</p>
+<h1 id="url-4">URL</h1>
+<p>/api/order/getAllOrder</p>
+<h3 id="method-4">Method:</h3>
+<p>GET</p>
+<h3 id="query-param-2">Query Param</h3>
+<p>user_id=5e9b2fcdcf73c13d4c3d20e4</p>
+<h3 id="example-success-response-4">Example Success Response:</h3>
+<p>[{&quot;<em>id&quot;:&quot;5e9b332d412e8d55b412b76e&quot;,&quot;user</em>id&quot;:&quot;5e9b2fcdcf73c13d4c3d20e4&quot;,&quot;order_name&quot;:&quot;pizza&quot;,&quot;food_id&quot;:&quot;5e9a8ed7f04936dc7abf3f3b&quot;,&quot;qty&quot;:&quot;2&quot;,&quot;offer_price&quot;:&quot;150&quot;,&quot;original_price&quot;:&quot;250&quot;,&quot;offer_name&quot;:&quot;cashback50&quot;,&quot;active&quot;:1}]</p>
+<h1 id="url-5">URL</h1>
+<p>/api/order/create</p>
+<h3 id="method-5">Method:</h3>
+<p>POST</p>
+<h3 id="body-data">Body Data</h3>
+<p>{ &quot;user_id&quot;: &quot;5e9b2fcdcf73c13d4c3d20e4&quot;, &quot;order_name&quot;: &quot;p_izza with icecream&quot;, &quot;food_id&quot;: &quot;5e9a8ed7f04936dc7abf3f3b&quot;, &quot;qty&quot;: &quot;2&quot;, &quot;offer_price&quot;: &quot;150&quot;, &quot;original_price&quot;: &quot;300&quot;, &quot;offer_name&quot;: &quot;cashback50%&quot;, &quot;active&quot;: 1 }</p>
+<h3 id="example-success-response-5">Example Success Response:</h3>
+<p>Success Response: 200 Error Response:403</p>
+<h1 id="url-6">URL</h1>
+<p>/api/ingredient/getThresoldQty</p>
+<h3 id="method-6">Method:</h3>
+<p>GET</p>
+<h3 id="no-params">No Params</h3>
+<h3 id="example-success-response-6">Example Success Response:</h3>
+<p>[{&quot;<em>id&quot;:&quot;5e9a8f15f04936dc7abf3f4f&quot;,&quot;ingredient</em>name&quot;:&quot;Bread&quot;,&quot;cost&quot;:30,&quot;remaining_qty&quot;:50,&quot;vendor_id&quot;:&quot;5e9a9275f04936dc7abf4055&quot;,&quot;available&quot;:&quot;1&quot;}]</p>
+<h1 id="url-7">URL</h1>
+<p>/api/ingredient/getBySameVendor</p>
+<h3 id="method-7">Method:</h3>
+<p>GET</p>
+<h3 id="query-param-3">Query Param</h3>
+<p>vendor_id=5e9a9275f04936dc7abf4055</p>
+<h3 id="example-success-response-7">Example Success Response:</h3>
+<p>[{&quot;<em>id&quot;:&quot;5e9a8f15f04936dc7abf3f4f&quot;,&quot;ingredient</em>name&quot;:&quot;Bread&quot;,&quot;cost&quot;:30,&quot;remaining_qty&quot;:50,&quot;vendor_id&quot;:&quot;5e9a9275f04936dc7abf4055&quot;,&quot;available&quot;:&quot;1&quot;}]</p>
+<h1 id="url-8">URL</h1>
+<p>/api/food/getListOverSellingCost</p>
+<h3 id="method-8">Method:</h3>
+<p>GET</p>
+<h3 id="no-params-1">No Params</h3>
+<h3 id="example-success-response-8">Example Success Response:</h3>
+<p>[{&quot;<em>id&quot;:&quot;5e9a8ed7f04936dc7abf3f3b&quot;,&quot;food</em>name&quot;:&quot;pizza&quot;,&quot;category&quot;:&quot;north_indian&quot;,&quot;ingredients_id&quot;:[&quot;2&quot;,&quot;5&quot;,&quot;8&quot;,&quot;7&quot;],&quot;total_ingredients_cost&quot;:230,&quot;production_cost&quot;:750,&quot;selling_cost&quot;:500,&quot;active&quot;:1}]</p>
