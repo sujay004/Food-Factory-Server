@@ -6,7 +6,6 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "3": "^2.1.0",
     "assert": "^2.0.0",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
