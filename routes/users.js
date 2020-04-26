@@ -19,8 +19,8 @@ const saltRounds = 10;
 
 
 MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-  if (!client) {
-    throw err;
+  if (err) {
+    console.log('Unable to Connect Server', err);
   } else {
     MONGODB = client.db(dbName);
     console.log('MONGODB Connected successfully to server');
@@ -156,17 +156,17 @@ router.get('/user/deactive', (req, res, next) => {
       collection.update({
         user_name: userName,
       },
-      {
-        $set: {
-          active: 0,
-        },
-      }, (err) => {
-        if (err) {
-          throw createError(403, 'Db Operation Failed');
-        } else {
-          res.status(200).json({ message: 'User Deactivate Success..!!' });
-        }
-      });
+        {
+          $set: {
+            active: 0,
+          },
+        }, (err) => {
+          if (err) {
+            throw createError(403, 'Db Operation Failed');
+          } else {
+            res.status(200).json({ message: 'User Deactivate Success..!!' });
+          }
+        });
     } else {
       throw createError(403, 'Param Mismatch');
     }
