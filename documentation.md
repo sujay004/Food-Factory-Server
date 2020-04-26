@@ -1,17 +1,26 @@
-# FOOD FACTORY APP API DOC
+# Food Factory App Backend Api Documentation
 --------------------------
+# Start Server
+    npm start
 
-# Dbconfig
 
-Connection Url : mongodb://localhost:27017
+# Environment Variable File Configuration
+    File Name - .env.dev
 
-db Name : food_factory
+#### Configuration
 
+    PORT=3000
+    APP_ENV=dev
+    DB_HOST=localhost
+    DB_NAME=food_factory
+    DB_PORT=27017
+    DB_USER=root
+    DB_PASS=root
 
 
 # URL
 
-/api/user/create
+    http://localhost:3000/api/user/create
 
 ### Method:
 
@@ -19,190 +28,196 @@ POST
 
 ### Example Body Data 
 
-{
-		"first_name": "sujay",
-          "last_name": "nandha",
-          "user_name": "sujay",
-          "password": "admin",
-          "email_id": "admin@gmail.com",
-          "mobile_number": "8056329132",
+      {
+	      "first_name": "srihari",
+          "last_name": "s",
+          "user_name": "srihari",
+          "password": "srihari",
+          "email_id": "srihari@gmail.com",
+          "mobile_number": "9756315489",
           "created_at": "2020-04-18T13:28:10.923Z",
           "active":"1"
-}
+      }
 
 
 
 
-### Example Success Response:
+### Example Response:
 
-Success Response: 200
-Error Response:403
+    Success Response: 
+    {
+        "message": "User Created Successfully..!!"
+    }
+
+    Error Response:
+    {
+        "message": "User Exist..!! Try Different..!!"
+    }
 
 
 
 # URL
 
-/api/user/authentication
+    http://localhost:3000/api/user/authentication?user_name=srihari&password=srihari
 
 ### Method:
 
-GET
+    GET
 
 ### Query Params 
 
-user_name=admin&password=admin
+    user_name=srihari&password=srihari
 
 
-### Example Success Response:
+### Example Response:
 
-Success Response: 200
-Error Response:403
+    Success Response: 
+    {"message":"Login Success..!!"}
+    Error Response:
+    {"message":"Incorrect Credentials..!!"}
 
 
 
 # URL
 
-/api/user/resetPassword
+    http://localhost:3000/api/user/resetPassword
 
 ### Method:
 
-GET
+    GET
 
 ### Query Param
 
-email_id=admin@gmail.com
+    email_id=admin@gmail.com
 
 ### Note
-In this api i was implemented sending mail for the new his email id.
-The Location of the Mail Config available in user.js file
+    In this api i was implemented sending mail for the new his email id.
+    The Location of the Mail Config available in user.js file
 ### Mail Config
- auth: {
-    user: 'xxxx@gmail.com',
-    pass: 'xxxxxx'
-  }
+    auth: {
+        user: 'xxxx@gmail.com',
+        pass: 'xxxxxx'
+      }
 
-### Example Success Response:
-
-Success Response: 200
-Error Response:403
-
-
-# URL
-
-/api/user/deactive
-
-### Method:
-
-GET
-
-### Query Param
-
-
-user_name=sujay
-
-
-### Example Success Response:
+### Example Response:
 
 Success Response: 200
 Error Response:403
 
 
-
 # URL
 
-/api/order/getAllOrder
+    [/api/user/deactive](http://localhost:3000/api/user/deactive?user_name=srihari)
 
 ### Method:
 
-GET
+    GET
 
 ### Query Param
 
 
-user_id=5e9b2fcdcf73c13d4c3d20e4
+    user_name=srihari
 
 
-### Example Success Response:
+### Example Response:
 
-[{"_id":"5e9b332d412e8d55b412b76e","user_id":"5e9b2fcdcf73c13d4c3d20e4","order_name":"pizza","food_id":"5e9a8ed7f04936dc7abf3f3b","qty":"2","offer_price":"150","original_price":"250","offer_name":"cashback50","active":1}]
+    Success Response: 
+    {"message":"User Deactivate Success..!!"}
+
 
 
 # URL
 
-/api/order/create
+    [/api/order/getAllOrder](http://localhost:3000/api/order/getAllOrder?user_id=5ea5217568a0ea35d0ed67c8)
 
 ### Method:
 
-POST
+    GET
+
+### Query Param
+
+
+    user_id=5ea5217568a0ea35d0ed67c8
+
+
+### Example Response:
+
+    [{"_id":"5ea52303f3a8a553f0be7c6f","user_id":"5ea5217568a0ea35d0ed67c8","order_name":"pizza","food_id":"5e9a8ed7f04936dc7abf3f3b","qty":"2","offer_price":"150","original_price":"250","offer_name":"cashback50","active":1},{"_id":"5ea523556b516335ccec0018","user_id":"5ea5217568a0ea35d0ed67c8","order_name":"pizza","food_id":"5e9a8ed7f04936dc7abf3f3b","qty":"2","offer_price":"150","original_price":"250","offer_name":"cashback50","active":1},{"_id":"5ea5236a0b255d5fb003ff86","user_id":"5ea5217568a0ea35d0ed67c8","order_name":"pizza","food_id":"5e9a8ed7f04936dc7abf3f3b","qty":"2","offer_price":"150","original_price":"250","offer_name":"cashback50","active":1}]
+
+# URL
+
+    [/api/order/create](http://localhost:3000/api/order/create)
+
+### Method:
+
+    POST
 
 ### Body Data 
 
-{
-      "user_id": "5e9b2fcdcf73c13d4c3d20e4",
-      "order_name": "p_izza with icecream",
+    {
+      "user_id": "5ea5217568a0ea35d0ed67c8",
+      "order_name": "pizza",
       "food_id": "5e9a8ed7f04936dc7abf3f3b",
       "qty": "2",
       "offer_price": "150",
-      "original_price": "300",
-      "offer_name": "cashback50%",
+      "original_price": "250",
+      "offer_name": "cashback50",
       "active": 1
-}
+    }
 
 
+### Example Response:
 
-### Example Success Response:
-
-Success Response: 200
-Error Response:403
-
-
+    Success Response: 
+    {
+        "message": "Order created successfully..!!"
+    }
 
 
 # URL
 
-/api/ingredient/getThresoldQty
+    [/api/ingredient/getThresoldQty](http://localhost:3000/api/ingredient/getThresoldQty)
 
 ### Method:
 
-GET
+    GET
 
 ### No Params
 
 
-### Example Success Response:
+### Example Response:
 
-[{"_id":"5e9a8f15f04936dc7abf3f4f","ingredient_name":"Bread","cost":30,"remaining_qty":50,"vendor_id":"5e9a9275f04936dc7abf4055","available":"1"}]
+    [{"_id":"5e9a8f15f04936dc7abf3f4f","ingredient_name":"bread","cost":30,"remaining_qty":50,"vendor_id":"5e9a9275f04936dc7abf4055","available":"1"}]
 
 # URL
 
-/api/ingredient/getBySameVendor
+    [/api/ingredient/getBySameVendor](http://localhost:3000/api/ingredient/getBySameVendor?vendor_id=5e9a9275f04936dc7abf4055)
 
 ### Method:
 
-GET
+    GET
 
 ### Query Param
 
 
-vendor_id=5e9a9275f04936dc7abf4055
+    vendor_id=5e9a9275f04936dc7abf4055
 
 
-### Example Success Response:
+### Example Response:
 
-[{"_id":"5e9a8f15f04936dc7abf3f4f","ingredient_name":"Bread","cost":30,"remaining_qty":50,"vendor_id":"5e9a9275f04936dc7abf4055","available":"1"}]
-
+    [{"_id":"5e9a8f15f04936dc7abf3f4f","ingredient_name":"bread","cost":30,"remaining_qty":50,"vendor_id":"5e9a9275f04936dc7abf4055","available":"1"}]
 
 # URL
 
-/api/food/getListOverSellingCost
+    [/api/food/getListOverSellingCost](http://localhost:3000/api/food/getListOverSellingCost)
 
 ### Method:
 
-GET
+    GET
 
 ### No Params
 
 
-### Example Success Response:
+### Example Response:
 
-[{"_id":"5e9a8ed7f04936dc7abf3f3b","food_name":"pizza","category":"north_indian","ingredients_id":["2","5","8","7"],"total_ingredients_cost":230,"production_cost":750,"selling_cost":500,"active":1}]
+    [{"_id":"5e9a8ed7f04936dc7abf3f3b","food_name":"pizza","category":"north_indian","ingredients_id":["5e9a8f15f04936dc7abf3f4f","5","8","7"],"total_ingredients_cost":230,"production_cost":750,"selling_cost":500,"active":1}]

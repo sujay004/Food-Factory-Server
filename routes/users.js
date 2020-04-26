@@ -135,7 +135,7 @@ router.get('/user/resetPassword', (req, res, next) => {
                 console.log(`Email sent: ${info.response}`);
               }
             });
-            res.sendStatus(200);
+            res.status(200).json({ message: 'New Password Sent To Your Email Id' });
           }
         },
       );
