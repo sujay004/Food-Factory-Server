@@ -10,6 +10,7 @@
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
+    "custom-env": "2.0.1",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "hbs": "~4.0.4",
@@ -19,5 +20,10 @@
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
     "swagger-ui-express": "^4.1.4"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-plugin-import": "2.20.2"
   }
 }
