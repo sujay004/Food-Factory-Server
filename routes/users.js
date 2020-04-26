@@ -20,7 +20,7 @@ const saltRounds = 10;
 
 MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
   if (err) {
-    console.log('Unable to Connect Server', err);
+    console.log('Unable to Connect to the Server', err);
   } else {
     MONGODB = client.db(dbName);
     console.log('MONGODB Connected successfully to server');
